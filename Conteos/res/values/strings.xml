@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Conteos</string>
+    <string name="configuracion">Configuración</string>
+    <string name="acerca_de">Acerca de</string>
+    <string name="title_activity_time_picker">TimePickerActivity</string>
+    <string name="seleccion_hora">Seleccionar Hora Inicial de Conteo</string>
+    <string name="botonCancelar">Cancelar</string>
+    <string name="botonGuardarHora">Guardar Hora</string>
+
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!--  Arreglo que corresponde a los dias de la semana -->
+    <string-array name="diasSemana">
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miércoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+        <item>Sábado</item>
+        <item>Domingo</item>
+    </string-array>
+    
+    
+    <!--  Arreglo que corresponde a los movimientos -->
+    <string-array name="movimientos">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9(1)</item>
+        <item>9(2)</item>
+        <item>9(3)</item>
+        <item>9(4)</item>
+        <item>10(1)</item>
+        <item>10(2)</item>
+        <item>10(3)</item>
+        <item>10(4)</item>
+    </string-array>
+    
+</resources>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="preferencias" >
+    
+    <ListPreference 
+        android:key="dia_conteo"
+        android:title="Día de Conteo"
+        android:summary="Día de la semana en que se realizó el conteo"
+        android:entries="@array/diasSemana"
+        android:entryValues="@array/diasSemana"
+        android:defaultValue="Lunes"
+        />
+    
+         
+  	<com.example.conteos.TimePickerPreference
+  	    android:key="hora_inicio_conteo"
+  	    android:title="Hora Inicio de Conteo"
+  	    android:summary="Hora en la cual se inicia el conteo." />
+  	
+  	
+  	<com.example.conteos.SeekBarPreference 
+  	    android:key="num_horas_a_contar"
+  	    android:title="Número de horas a contar"
+  	    android:summary="Límite de horas correspondientes al conteo."/>
+  	
+  	<EditTextPreference
+  	    android:key="estacion"
+  	    android:title="Estación"
+  	    android:summary="Número de la estación asociada al conteo."
+  	    android:inputType="number"
+  	    android:dialogTitle="Ingrese el número de la estación" />
+  	
+  	
+  	
+  	<PreferenceCategory android:title="Creación de Interfaz Gráfica">	
+  	    
+	  	<MultiSelectListPreference
+	  	    android:key="movimientos_a_contar"
+	  	    android:title="Movimientos a Contar"
+	  	    android:summary="Lista de movimientos a contar"
+  	    	android:dialogTitle="Ingrese el número de movimientos: "
+  	    	android:entries="@array/movimientos"
+  	    	android:entryValues="@array/movimientos" />
+	  	
+	  	
+	  	<PreferenceScreen
+	  		android:title="Modos de Transporte"
+	  		android:summary="Modos de transporte a contar">
+	  		<CheckBoxPreference
+	  		    android:key="habilitar_agrupamiento_camiones"
+	  		    android:title="Habilitar Agrupamiento Camiones" />
+	  		
+	  		<com.example.conteos.MultiSelectListPreference
+	  		    android:key="medios_transporte" 
+	  		    android:title="Medios de transporte"
+	  		    android:entries="@array/diasSemana"
+	  		    android:entryValues="@array/diasSemana" />  	    
+	  	</PreferenceScreen>	  	
+	
+	  		
+	</PreferenceCategory>
+    
+    
+
+</PreferenceScreen>
