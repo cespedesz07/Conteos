@@ -12,7 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View;
 
-/*COMENTARIO EDDY*/
+//Eddy
 public class Cronometro{
 	
 	int seg=00;
