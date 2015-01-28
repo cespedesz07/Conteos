@@ -19,7 +19,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 
-
+// CAMBIO DE SANTI
 public class MainActivity extends ActionBarActivity {
 	
 	public boolean estadoActivo = false; //Variable que identifica si el cronometro esta corriendo

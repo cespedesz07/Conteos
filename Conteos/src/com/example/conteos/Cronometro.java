@@ -12,7 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View;
 
-
+//santi el metido
 public class Cronometro{
 	
 	int seg=00;
