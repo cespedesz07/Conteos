@@ -8,5 +8,13 @@
     <string name="seleccion_hora">Seleccionar Hora Inicial de Conteo</string>
     <string name="botonCancelar">Cancelar</string>
     <string name="botonGuardarHora">Guardar Hora</string>
+    <string name="btnInicio">Iniciar</string>
+    <string name="btnFin">Finalizar</string>
+    <string name="camion3Text">Camion 3 ejes</string>
+    <string name="camion2Text">Camion 2 ejes</string>
+    <string name="motoText">Moto</string>
+    <string name="colectivoText">Colectivo</string>
+    <string name="camionetaText">Camioneta</string>
+    <string name="autoText">Automovil</string>
 
 </resources>

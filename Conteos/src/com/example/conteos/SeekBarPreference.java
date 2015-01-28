@@ -38,11 +38,12 @@ public class SeekBarPreference extends DialogPreference {
 	public SeekBarPreference( Context context, AttributeSet attrs ){
 		super(context, attrs);
 		Log.i( "Attribute Name", attrs.getAttributeName(0) );
-		setDialogTitle( "Seleccione el límte de horas a contar" );
+		setDialogTitle( "Seleccione el lï¿½mte de horas a contar" );
 		setDialogLayoutResource( R.layout.seek_bar_picker );
 		setPositiveButtonText("Aceptar");
 		setNegativeButtonText("Cancelar");
 	}
+	
 	
 	
 	@Override
@@ -130,14 +131,14 @@ public class SeekBarPreference extends DialogPreference {
 		int horasEnMin = 0;
 		String horasString = "";
 		
-		//Si la barra de progreso está ubicada en 1, 3, 5, 7, es porque está ubicado en las horas 1, 2, 3
+		//Si la barra de progreso estï¿½ ubicada en 1, 3, 5, 7, es porque estï¿½ ubicado en las horas 1, 2, 3
 		//Lo transforma al minuto respectivo: 60, 120, 180    
 		if ( progreso % 2 != 0 ){
 			horasEnMin = ((progreso / 2) + (progreso % 2));
 			horasString = String.valueOf( horasEnMin ) + " Hrs 00 Min";
 			horasEnMin = horasEnMin * 60;
 		}
-		//Si la barra de progreso está ubicada en 2, 4, 6, 8, 
+		//Si la barra de progreso estï¿½ ubicada en 2, 4, 6, 8, 
 		//corresponde a la hora 2hr 30min, 3hr 30min, 4hr 30min
 		//Entonces se cambia al minuto respectivo: 90, 150, 210
 		else{
