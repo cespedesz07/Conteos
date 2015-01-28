@@ -372,8 +372,8 @@ int id button6 0x7f0a004c
 int id button7 0x7f0a0045
 int id button8 0x7f0a0046
 int id buttonAuto 0x7f0a003f
-int id buttonCamion2 0x7f0a0043
-int id buttonCamion3 0x7f0a0044
+int id buttonCamion2 0x7f0a0044
+int id buttonCamion3 0x7f0a0043
 int id buttonCamioneta 0x7f0a0040
 int id buttonColectivo 0x7f0a0041
 int id buttonMoto 0x7f0a0042
