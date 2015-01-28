@@ -13,8 +13,10 @@ import android.view.View;
 import android.view.View;
 
 //santi el metido
-//otra linea
+/*COMENTARIO EDDY*/
 public class Cronometro{
+	
+	//otro comentario
 	
 	int seg=00;
 	int min=00;
