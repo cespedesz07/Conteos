@@ -16,5 +16,7 @@
     <string name="colectivoText">Colectivo</string>
     <string name="camionetaText">Camioneta</string>
     <string name="autoText">Automovil</string>
+    <string name="title_activity_modos_transporte">ModosTransporteActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

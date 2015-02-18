@@ -6,13 +6,13 @@
     android:orientation="vertical"
     tools:context="com.example.conteos.MainActivity" >
     
+    
     <LinearLayout
-        android:id="@+id/fragmentsLayout" 
-        android:orientation="horizontal"
-        android:layout_height="400dp"
-        android:layout_width="fill_parent" >
-        <!--  android:layout_weight="5"--> 
-        
+        android:id="@+id/fragmentsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:orientation="horizontal" >        
+        <!--
         <fragment 
             android:name="com.example.conteos.FragmentMovimientoUno"
             android:id="@+id/fragmentMov1"
@@ -30,9 +30,10 @@
             android:id="@+id/fragmentMov3"
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
- 
+            android:layout_height="match_parent" /> 
+         -->
     </LinearLayout>
+    
     
     <LinearLayout
         android:id="@+id/barraLayout"
@@ -52,12 +53,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
                 
+                
                 <TextView 
                     android:id="@+id/textViewScroll"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:text="S2/Martes/12:00:00/Peaton/3"
+                    android:text="Estación \tDia \tHora \tMovimiento \tModo"
                     android:textColor="#ffffff" />
+                <!-- 
                 <TextView 
                     android:id="@+id/textViewScroll1"
                     android:layout_width="fill_parent"
@@ -88,6 +91,7 @@
                     android:layout_height="fill_parent"
                     android:text="S2/Martes/12:00:00/Peaton/3"
                     android:textColor="#ffffff" />
+               	-->
                 
             </LinearLayout>
         </ScrollView>

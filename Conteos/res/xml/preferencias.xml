@@ -28,13 +28,14 @@
   	    android:title="Estación"
   	    android:summary="Número de la estación asociada al conteo."
   	    android:inputType="number"
-  	    android:dialogTitle="Ingrese el número de la estación" />
+  	    android:dialogTitle="Ingrese el número de la estación"
+  	    android:defaultValue="1" />
   	
   	
   	
   	<PreferenceCategory android:title="Creación de Interfaz Gráfica">	
   	    
-	  	<MultiSelectListPreference
+	  	<com.example.conteos.MultiSelectMovimientosPreference
 	  	    android:key="movimientos_a_contar"
 	  	    android:title="Movimientos a Contar"
 	  	    android:summary="Lista de movimientos a contar"
@@ -45,16 +46,8 @@
 	  	
 	  	<PreferenceScreen
 	  		android:title="Modos de Transporte"
-	  		android:summary="Modos de transporte a contar">
-	  		<CheckBoxPreference
-	  		    android:key="habilitar_agrupamiento_camiones"
-	  		    android:title="Habilitar Agrupamiento Camiones" />
-	  		
-	  		<com.example.conteos.MultiSelectListPreference
-	  		    android:key="medios_transporte" 
-	  		    android:title="Medios de transporte"
-	  		    android:entries="@array/diasSemana"
-	  		    android:entryValues="@array/diasSemana" />  	    
+	  		android:summary="Modos de transporte a contar" >
+	  		<intent android:action=".activities.ModosTransporteListActivity" />	  		 	    
 	  	</PreferenceScreen>	  	
 	
 	  		
