@@ -31,13 +31,18 @@ public class MultiSelectListPreference extends ListPreference implements OnMulti
 	}
 	
 	
+	/**
+	 * Captura las entradas del Arreglo de los movimientos
+	 */
 	@Override
 	public void setEntries( CharSequence[] entries ){
 		super.setEntries( entries );
 	}
 	
+	
+	
 	/**
-	 * Este método se invoca al momento de crear la lista de multiple seleccion
+	 * Este mï¿½todo se invoca al momento de crear la lista de multiple seleccion
 	 * es el responsable de abrir el Dialog al hacer click en 
 	 */
 	protected void onPrepareDialogBuilder( Builder builder ){
@@ -57,7 +62,7 @@ public class MultiSelectListPreference extends ListPreference implements OnMulti
 			List lista = Arrays.asList( getEntries() );
 			Set<String> setEntradas = new HashSet<String>( lista );
 			
-			//editor.putString( CLAVE_MEDIOS_TRANSPORTE , setEntradas );
+			editor.putStringSet( CLAVE_MEDIOS_TRANSPORTE , setEntradas );
 			
 			
 		}		
