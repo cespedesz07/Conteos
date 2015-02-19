@@ -137,8 +137,7 @@ public class MainActivity extends ActionBarActivity {
 							
 								@Override
 								public void onClick(View v) {
-								
-									if (estadoActivo == false && iniciado1 == true)
+								    if (estadoActivo == false && iniciado1 == true)
 									{
 										Toast.makeText(getBaseContext(), "Conteo iniciado", Toast.LENGTH_SHORT).show();
 										iniciado = true;
