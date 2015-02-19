@@ -314,7 +314,28 @@ public class MainActivity extends ActionBarActivity {
 		this.almacenamientoConteos = new AlmacenamientoConteos( this );
 		actualizarGUI( this.movimientosPorDefecto, this.modosTransportePorDefecto );
 		
+		//On Resume
+		cronometro = (TextView) findViewById(R.id.textViewCronometro);
 		
+		SharedPreferences horaInicio = getSharedPreferences("com.example.conteos_preferences", MODE_PRIVATE);
+		String hora = horaInicio.getString(TimePickerPreference.CLAVE_HORA_INCIO_CONTEO, TimePickerPreference.VALOR_HORA_DEFECTO);
+		horaSinFormato = hora+":00";
+		
+		SharedPreferences horasContar = getSharedPreferences("com.example.conteos_preferences", MODE_PRIVATE);
+		progresoHorasConteo = horasContar.getInt(SeekBarPreference.CLAVE_NUM_HORAS_A_CONTAR, SeekBarPreference.VALOR_NUM_HORAS_DEFECTO);
+		Log.i("Progreso", ""+progresoHorasConteo);
+		
+		try {	
+			
+			//horaInicioFormato = mCronometro.formatoCronometro(horaSinFormato);
+			horaInicioFormato = mFormato.formatoCronometro(horaSinFormato);
+			cronometro.setText(horaInicioFormato);
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		new CronometroHilo(estadoActivo, inicioPrimerVez, iniciado, progresoHorasConteo, horaInicioFormato).execute(horaInicioFormato);
 		
 					
 	}
@@ -369,7 +390,7 @@ public class MainActivity extends ActionBarActivity {
 	{
 		super.onResume();
 		//Cronometro cron = new Cronometro();
-		
+		/*
 		cronometro = (TextView) findViewById(R.id.textViewCronometro);
 		
 		SharedPreferences horaInicio = getSharedPreferences("com.example.conteos_preferences", MODE_PRIVATE);
@@ -389,92 +410,12 @@ public class MainActivity extends ActionBarActivity {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-		//new CronometroHilo(estadoActivo, inicioPrimerVez, iniciado, progresoHorasConteo, horaInicioFormato);
-		CronometroHilo cronometro = new CronometroHilo(estadoActivo, inicioPrimerVez, iniciado, progresoHorasConteo, horaInicioFormato);
-		cronometro.execute(horaInicioFormato);
+
+		//new CronometroHilo(estadoActivo, inicioPrimerVez, iniciado, progresoHorasConteo, horaInicioFormato).execute(horaInicioFormato);
+		//CronometroHilo cronometro = new CronometroHilo(estadoActivo, inicioPrimerVez, iniciado, progresoHorasConteo, horaInicioFormato);
+		//cronometro.execute(horaInicioFormato);*/
 	}
 	
-
-	/*
-	public void onClickInicio(View v)       
-	{	
-		String horaFormatoActual="";
-		cronometro = (TextView) findViewById(R.id.textViewCronometro);
-		btnInicio = (Button) findViewById(R.id.btnInicio);
-		iniciado = true;
-		
-		if (estadoActivo == false && inicioPrimerVez == true)
-		{	
-			estadoActivo = true;
-			inicioPrimerVez = false;
-			
-			//Escribir codigo del metodo Inicio de la clase Cronometro
-			//mCronometro.inicio(horaSinFormato, cronometro, horasConteo);  //El TimeTask mientras se ejecuta sigue con las lineas de abajo																		
-			btnInicio.setText("Pausar");
-			Toast.makeText(getBaseContext(), "El conteo ha iniciado", Toast.LENGTH_SHORT).show();
-
-			
-
-		}
-		else
-		{
-			if (estadoActivo == false && inicioPrimerVez == false)
-			{
-				estadoActivo = true;
-				horaFormatoActual = mCronometro.getCronometroTiempo(); //Obtenerlo directamente de esta clase cuando se copie el codigo de inicio
-				//mCronometro.inicio(horaFormatoActual, cronometro, horasConteo);  
-				btnInicio.setText("Pausar");
-			}
-			else														
-			{
-				if (estadoActivo == true)
-				{
-					estadoActivo = false;
-					//mCronometro.pausa(); Escribir el metodo pausa en esta clase
-					btnInicio.setText("Iniciar");
-				}
-			}
-		}
-
-	}*/
-	
-	
-	/*
-	public void onClickFinal(View v)				
-	{												
-													
-		if (iniciado == true && estadoActivo == false)
-		{
-			iniciado = false;
-			estadoActivo = false;
-			Button btnInicio = (Button) findViewById(R.id.btnInicio);
-			horaFinal = mCronometro.getCronometroTiempo(); //Obtener el vlr cuando escriba el codigo en esta misma clase
-			//mCronometro.fin(horaInicioFormato, horaFinal); Escribir el código en esta misma clase
-			inicioPrimerVez = true;
-			btnInicio.setText("Iniciar");
-			Toast.makeText(getBaseContext(), "El conteo ha finalizado", Toast.LENGTH_SHORT).show();
-			//startActivity(new Intent("com.example.conteos.SecondActivity"));
-		}
-		else if (iniciado == true && estadoActivo == true)
-		{
-			iniciado = false;
-			estadoActivo = false;
-			Button btnInicio = (Button) findViewById(R.id.btnInicio);
-			horaFinal = mCronometro.getCronometroTiempo(); //Obtener el vlr cuando escriba el codigo en esta misma clase
-			//mCronometro.fin(horaInicioFormato, horaFinal); Escribir el código en esta misma clase
-			inicioPrimerVez = true;
-			btnInicio.setText("Iniciar");
-			Toast.makeText(getBaseContext(), "El conteo ha finalizado", Toast.LENGTH_SHORT).show();
-			//startActivity(new Intent("com.example.conteos.SecondActivity"));
-		}
-		else
-		{
-			Toast.makeText(getBaseContext(), "Por favor inicie el conteo", Toast.LENGTH_SHORT).show();
-		}
-	}*/
 
 	
 	
