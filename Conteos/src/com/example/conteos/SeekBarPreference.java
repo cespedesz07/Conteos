@@ -27,12 +27,14 @@ public class SeekBarPreference extends DialogPreference {
 	
 	private static final int HORA_MIN = 1;
 	
+	String tiempoConteoString = "";
+	
 	
 	private TextView textViewHoraSeleccionada;
 	private SeekBar seekBar;
 	private TextView textViewIntervaloHoras;
 	private SharedPreferences prefActuales;
-	
+
 	
 	
 	public SeekBarPreference( Context context, AttributeSet attrs ){
@@ -44,6 +46,7 @@ public class SeekBarPreference extends DialogPreference {
 		setNegativeButtonText("Cancelar");
 	}
 	
+
 	
 	
 	@Override
@@ -136,6 +139,7 @@ public class SeekBarPreference extends DialogPreference {
 		if ( progreso % 2 != 0 ){
 			horasEnMin = ((progreso / 2) + (progreso % 2));
 			horasString = String.valueOf( horasEnMin ) + " Hrs 00 Min";
+			tiempoConteoString = String.valueOf( horasEnMin ) + ":00:00:";
 			horasEnMin = horasEnMin * 60;
 		}
 		//Si la barra de progreso est� ubicada en 2, 4, 6, 8, 
@@ -144,6 +148,7 @@ public class SeekBarPreference extends DialogPreference {
 		else{
 			horasEnMin = ( (progreso / 2) );
 			horasString = String.valueOf( horasEnMin ) + " Hrs 30 Min";
+			tiempoConteoString= String.valueOf( horasEnMin ) + ":30:00";	
 			horasEnMin = (horasEnMin * 60) + 30;
 		}
 		
@@ -159,6 +164,29 @@ public class SeekBarPreference extends DialogPreference {
 		
 		
 	}
+	
+	
+	/*
+	public void tiempoConteo (int progreso)
+	{
+		int tiempoConteo=0;
+		
+		if ( progreso % 2 != 0 ){
+			tiempoConteo = ((progreso / 2) + (progreso % 2));
+			tiempoConteoString = String.valueOf( tiempoConteo ) + ":00:00:";
+		}
+		else{
+			tiempoConteo = ( (progreso / 2) );
+			tiempoConteoString= String.valueOf( tiempoConteo ) + ":30:00";	
+		}		
+	}*/
+	
+	public String obtenerFormato()
+	{
+		return tiempoConteoString;
+	}
+		
+		
 	
 	
 

@@ -102,8 +102,8 @@
             android:id="@+id/btnInicio"
             android:layout_width="100dp"
             android:layout_height="48dp"
-            android:text="@string/btnInicio"
-            android:onClick="onClickInicio"/>
+            android:text="@string/btnInicio"/>
+            <!--  android:onClick="onClickInicio" --> 
         
 
         
@@ -111,8 +111,8 @@
             android:id="@+id/btnFin"
             android:layout_width="100dp"
             android:layout_height="48dp"
-            android:text="@string/btnFin"
-            android:onClick="onClickFinal"/>
+            android:text="@string/btnFin" />
+            <!-- android:onClick="onClickFinal" -->
         
 
         
