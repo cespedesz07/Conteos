@@ -1,19 +1,23 @@
 package com.example.conteos;
 
 
-
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,14 +26,15 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.Toast;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
+import android.content.SharedPreferences.Editor;
+import android.graphics.Point;
 
 import com.example.conteos.SeekBarPreference;
 
 
-// CAMBIO DE SANTI
 public class MainActivity extends ActionBarActivity {
 	
 	public boolean estadoActivo = false; //Variable que identifica si el cronometro esta corriendo
@@ -38,6 +43,12 @@ public class MainActivity extends ActionBarActivity {
 	public String horaInicioFormato; //Variable que recibe la hora inicial del conteo con el formato debido
 	public String horaSinFormato=""; //Variable con la hora de inicio de conteo que se va a formatear se obtiene de las preferencias
 	public String horaFinal=""; //Hora en el que el conteo se detuvo
+	
+	private HashSet<String> movimientosPorDefecto;
+	private HashSet<String> modosTransportePorDefecto;
+	
+	public AlmacenamientoConteos almacenamientoConteos;
+	
 	public Cronometro mCronometro = new Cronometro();
 	public Formato mFormato = new Formato();
 	
@@ -294,10 +305,65 @@ public class MainActivity extends ActionBarActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.fragments_container);	
+		super.onCreate(savedInstanceState);	
+		setContentView( R.layout.fragments_container );		
+		
+		ArregloModosMovimientos arreglos = new ArregloModosMovimientos();		
+		this.movimientosPorDefecto = arreglos.getMovimentosPorDefecto();
+		this.modosTransportePorDefecto = arreglos.getModosTransportePorDefecto();
+		
+		this.almacenamientoConteos = new AlmacenamientoConteos( this );
+		actualizarGUI( this.movimientosPorDefecto, this.modosTransportePorDefecto );
+		
+		
+		
+					
+	}
+	
+	
+	public void actualizarGUI( Set<String> movimientosPorDefecto, Set<String> modosTransportePorDefecto ){
+		SharedPreferences prefActuales = getSharedPreferences( "com.example.conteos_preferences", MODE_PRIVATE );
+		Set<String> movimientosActuales = prefActuales.getStringSet( MultiSelectMovimientosPreference.CLAVE_MOVIMIENTOS, movimientosPorDefecto );		
+		Set<String> modosTransporteActuales = prefActuales.getStringSet( ModosTransporteListActivity.CLAVE_MODOS_TRANSPORTE, modosTransportePorDefecto );
+		
+		int tamanoFragments = obtenerAnchoFragmentMovimiento( movimientosActuales.size() );
+		
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		
+		for ( String nombreMovimiento : movimientosActuales ){
+			FragmentMovimiento fragmentMovimiento = new FragmentMovimiento( nombreMovimiento, modosTransporteActuales, tamanoFragments, 
+					this.almacenamientoConteos, this );
+			fragmentTransaction.add( R.id.fragmentsLayout, fragmentMovimiento, nombreMovimiento );
+		}		
+		fragmentTransaction.commit();
 	}
 
+	
+	
+	@SuppressLint("NewApi")
+	private int obtenerAnchoFragmentMovimiento( int numMovimientos ){
+		Display display = getWindowManager().getDefaultDisplay();
+		Point tamanoPantalla = new Point();
+		display.getSize( tamanoPantalla );
+		int ancho = tamanoPantalla.x;
+		return ancho / numMovimientos;
+	}
+	
+	@Override
+	protected void onActivityResult( int requestCode, int resultCode, Intent intent ){
+		super.onActivityResult(requestCode, resultCode, intent);
+		if ( requestCode == PreferenciasActivity.REFRESH_CODE ){
+			actualizarGUI( this.movimientosPorDefecto, this.modosTransportePorDefecto );
+		}
+	}
+	
+	
+	@Override
+	protected void onPause(){
+		super.onPause();
+		this.finish();
+	} 
 	
 	
 	public void onResume()
