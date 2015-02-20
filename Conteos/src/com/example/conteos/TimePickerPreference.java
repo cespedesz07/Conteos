@@ -28,9 +28,9 @@ public class TimePickerPreference extends DialogPreference {
 	}	
 	
 	/**
-	 * Método que asocia la vista time_picker.xml al actual DialogPreference.
-	 * Útil al momento de mostrar el time_picker.xml al momento de abirse el dialogo
-	 * y tambien útila para capturar la hora seleccionada
+	 * Mï¿½todo que asocia la vista time_picker.xml al actual DialogPreference.
+	 * ï¿½til al momento de mostrar el time_picker.xml al momento de abirse el dialogo
+	 * y tambien ï¿½tila para capturar la hora seleccionada
 	 */
 	@Override
 	protected void onBindDialogView( View vista ){
@@ -40,7 +40,7 @@ public class TimePickerPreference extends DialogPreference {
 		SharedPreferences prefActuales = getSharedPreferences();
 		
 		//Si no existe la preferencia de hora de inicio de conteo, 
-		//el sgte método retorna el valor x defecto
+		//el sgte mï¿½todo retorna el valor x defecto
 		String[] horaActual = prefActuales.getString( CLAVE_HORA_INCIO_CONTEO, VALOR_HORA_DEFECTO ).split( SEPARADOR_HORA );
 
 		this.timePicker.setCurrentHour(   Integer.valueOf(horaActual[0]) );
@@ -49,7 +49,7 @@ public class TimePickerPreference extends DialogPreference {
 	}	
 	
 	/**
-	 * Al dar click en los botones aceptar o cancelar, se ejecuta este método
+	 * Al dar click en los botones aceptar o cancelar, se ejecuta este mï¿½todo
 	 */
 	@Override
 	protected void onDialogClosed( boolean haAceptado ){

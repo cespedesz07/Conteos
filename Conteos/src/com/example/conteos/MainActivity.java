@@ -108,9 +108,10 @@ public class MainActivity extends ActionBarActivity {
 			btnInicio = (Button) findViewById(R.id.btnInicio);
 			btnFin = (Button) findViewById(R.id.btnFin);
 			cronometro.setText(horaInicio);
+			Log.i("Exe", "Ejecutando");
 		}
 		
-		
+		@Override
 		protected String doInBackground(String... horaFormato) //Manejo de cronometro (Start Pause Stop), mirar si manejar el texto de los botones y Stop automatico
 		{												
 														
@@ -134,9 +135,10 @@ public class MainActivity extends ActionBarActivity {
 					
 					btnInicio.setOnClickListener(new OnClickListener()
 							{
-							
 								@Override
 								public void onClick(View v) {
+
+									Log.i("Exe", "Ejecutando en el hilo");
 								    if (estadoActivo == false && iniciado1 == true)
 									{
 										Toast.makeText(getBaseContext(), "Conteo iniciado", Toast.LENGTH_SHORT).show();
@@ -153,6 +155,7 @@ public class MainActivity extends ActionBarActivity {
 												{
 													public void run()
 													{
+														Log.i("Exe", "Ejecutando en el hilo");
 														mCalendar.add(Calendar.SECOND, segundo);
 														Date cronometroAumento = mCalendar.getTime();
 														cronometroTiempo = formato.format(cronometroAumento);
@@ -191,6 +194,7 @@ public class MainActivity extends ActionBarActivity {
 												{
 													public void run()
 													{
+														Log.i("Exe", "Ejecutando en el hilo");
 														mCalendar.add(Calendar.SECOND, segundo);
 														Date cronometroAumento = mCalendar.getTime();
 														cronometroTiempo = formato.format(cronometroAumento);
@@ -314,30 +318,6 @@ public class MainActivity extends ActionBarActivity {
 		this.almacenamientoConteos = new AlmacenamientoConteos( this );
 		actualizarGUI( this.movimientosPorDefecto, this.modosTransportePorDefecto );
 		
-		//On Resume
-		cronometro = (TextView) findViewById(R.id.textViewCronometro);
-		
-		SharedPreferences horaInicio = getSharedPreferences("com.example.conteos_preferences", MODE_PRIVATE);
-		String hora = horaInicio.getString(TimePickerPreference.CLAVE_HORA_INCIO_CONTEO, TimePickerPreference.VALOR_HORA_DEFECTO);
-		horaSinFormato = hora+":00";
-		
-		SharedPreferences horasContar = getSharedPreferences("com.example.conteos_preferences", MODE_PRIVATE);
-		progresoHorasConteo = horasContar.getInt(SeekBarPreference.CLAVE_NUM_HORAS_A_CONTAR, SeekBarPreference.VALOR_NUM_HORAS_DEFECTO);
-		Log.i("Progreso", ""+progresoHorasConteo);
-		
-		try {	
-			
-			//horaInicioFormato = mCronometro.formatoCronometro(horaSinFormato);
-			horaInicioFormato = mFormato.formatoCronometro(horaSinFormato);
-			cronometro.setText(horaInicioFormato);
-
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
-		new CronometroHilo(estadoActivo, inicioPrimerVez, iniciado, progresoHorasConteo, horaInicioFormato).execute(horaInicioFormato);
-		
-					
 	}
 	
 	
@@ -355,8 +335,9 @@ public class MainActivity extends ActionBarActivity {
 			FragmentMovimiento fragmentMovimiento = new FragmentMovimiento( nombreMovimiento, modosTransporteActuales, tamanoFragments, 
 					this.almacenamientoConteos, this );
 			fragmentTransaction.add( R.id.fragmentsLayout, fragmentMovimiento, nombreMovimiento );
-		}		
+		}
 		fragmentTransaction.commit();
+		
 	}
 
 	
@@ -370,12 +351,14 @@ public class MainActivity extends ActionBarActivity {
 		return ancho / numMovimientos;
 	}
 	
-	@Override
+	
+	//@Override
 	protected void onActivityResult( int requestCode, int resultCode, Intent intent ){
 		super.onActivityResult(requestCode, resultCode, intent);
 		if ( requestCode == PreferenciasActivity.REFRESH_CODE ){
 			actualizarGUI( this.movimientosPorDefecto, this.modosTransportePorDefecto );
 		}
+		
 	}
 	
 	
@@ -386,11 +369,12 @@ public class MainActivity extends ActionBarActivity {
 	} 
 	
 	
+	@Override
 	public void onResume()
 	{
 		super.onResume();
 		//Cronometro cron = new Cronometro();
-		/*
+		
 		cronometro = (TextView) findViewById(R.id.textViewCronometro);
 		
 		SharedPreferences horaInicio = getSharedPreferences("com.example.conteos_preferences", MODE_PRIVATE);
@@ -411,9 +395,9 @@ public class MainActivity extends ActionBarActivity {
 			e.printStackTrace();
 		}
 
-		//new CronometroHilo(estadoActivo, inicioPrimerVez, iniciado, progresoHorasConteo, horaInicioFormato).execute(horaInicioFormato);
+		new CronometroHilo(estadoActivo, inicioPrimerVez, iniciado, progresoHorasConteo, horaInicioFormato).execute(horaInicioFormato);
 		//CronometroHilo cronometro = new CronometroHilo(estadoActivo, inicioPrimerVez, iniciado, progresoHorasConteo, horaInicioFormato);
-		//cronometro.execute(horaInicioFormato);*/
+		//cronometro.execute(horaInicioFormato);
 	}
 	
 
