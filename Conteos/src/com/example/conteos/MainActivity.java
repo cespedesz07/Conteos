@@ -114,9 +114,7 @@ public class MainActivity extends ActionBarActivity {
 		@Override
 		protected String doInBackground(String... horaFormato) //Manejo de cronometro (Start Pause Stop), mirar si manejar el texto de los botones y Stop automatico
 		{												
-														
-			
-			
+
 			//1 Comprobar que el cronometro no ha cumplido el tiempo de conteo
 			
 			String horaInicioCronometro = horaFormato[0];
@@ -130,6 +128,8 @@ public class MainActivity extends ActionBarActivity {
 				mCalendar.setTime(horaInicioFormateada);
 				cronometroFormateado = formato.format(mCalendar.getTime());
 				
+				
+				//Log.i("MENSAJE", ""+isCancelled());
 				while (!isCancelled())  //verificar si el while esta funcionando ---- Mirar la doncición del While para terminar cuando se complete el tiempo
 				{
 					
@@ -159,12 +159,13 @@ public class MainActivity extends ActionBarActivity {
 														mCalendar.add(Calendar.SECOND, segundo);
 														Date cronometroAumento = mCalendar.getTime();
 														cronometroTiempo = formato.format(cronometroAumento);
+														contadorProgreso += segundo;
 														segundo = 1;
-														contadorProgreso += 1;
 														if (contadorProgreso == segundosProgresoSeekBar)
 														{
 															contadorProgreso = 0;
 															progresoCronometro +=1;
+															segundosProgresoSeekBar = 180;
 														
 															if (progresoCronometro == progresoHorasConteo)
 															{
@@ -179,7 +180,10 @@ public class MainActivity extends ActionBarActivity {
 												});	
 											}
 										};
-										timer.schedule(timerTask, 0, 1000);
+										if (finalizar != true)
+											timer.schedule(timerTask, 0, 1000);
+										else
+											cancel(true);
 										
 									}
 									else if (estadoActivo == false && iniciado1 == false)
@@ -198,11 +202,13 @@ public class MainActivity extends ActionBarActivity {
 														mCalendar.add(Calendar.SECOND, segundo);
 														Date cronometroAumento = mCalendar.getTime();
 														cronometroTiempo = formato.format(cronometroAumento);
-														segundo = 1;
+														contadorProgreso += segundo;
+														segundo = 1;													
 														if (contadorProgreso == segundosProgresoSeekBar)
 														{
 															contadorProgreso = 0;
 															progresoCronometro +=1;
+															segundosProgresoSeekBar = 180;
 														
 															if (progresoCronometro == progresoHorasConteo)
 															{
@@ -215,7 +221,10 @@ public class MainActivity extends ActionBarActivity {
 												});	
 											}
 										};
-										timer.schedule(timerTask, 0, 1000);
+										if (finalizar != true)
+											timer.schedule(timerTask, 0, 1000);
+										else
+											cancel(true);
 									}
 									else if(estadoActivo == true)
 									{
@@ -225,8 +234,8 @@ public class MainActivity extends ActionBarActivity {
 									}
 								}
 							});
-					
-					Log.i("Testing", "Fuera del Onclick");
+					   
+					Log.i("Testing", "Fuera del Onclick");     //Este si esta funcionando
 				
 				
 					btnFin.setOnClickListener(new OnClickListener()  //Revisar como finalizar.
@@ -261,6 +270,8 @@ public class MainActivity extends ActionBarActivity {
 						cancel(true);
 					
 					
+					
+					
 				
 				} //Fin del While
 				
@@ -293,7 +304,7 @@ public class MainActivity extends ActionBarActivity {
 		@Override
 		protected void onCancelled(String cron) //Mirar que se ejecute con el boton de Finalizar antes del tiempo total de conteo
 		{
-			cronometro.setText("Finalizdo");    
+			cronometro.setText(horaInicio+"     Cronometro finalizado "+cron);    
 		}
 		
 		
