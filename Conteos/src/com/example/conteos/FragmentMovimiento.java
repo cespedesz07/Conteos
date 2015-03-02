@@ -18,6 +18,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -107,5 +108,8 @@ public class FragmentMovimiento extends Fragment implements OnClickListener {
 		//Toast.makeText(getActivity(), "Almacenado: " + texto, Toast.LENGTH_SHORT).show();
 		TextView textViewScroll = (TextView) this.getActivity().findViewById( R.id.textViewScroll );
 		textViewScroll.setText( textViewScroll.getText() + "\n" + texto );
+		
+		ScrollView scrollView = (ScrollView) textViewScroll.getParent().getParent();	//Se captura el scroll asociado al  textView donde se muestra el impreso del registro
+		scrollView.fullScroll( ScrollView.FOCUS_DOWN );									//Se configura el scroll para que siempre apunte el cursor al final
 	}
 }

@@ -312,11 +312,7 @@ public class MainActivity extends ActionBarActivity {
 		this.modosTransportePorDefecto = arreglos.getModosTransportePorDefecto();
 		
 		this.almacenamientoConteos = new AlmacenamientoConteos( this );
-		actualizarGUI( this.movimientosPorDefecto, this.modosTransportePorDefecto );
-		
-		
-		
-					
+		actualizarGUI( this.movimientosPorDefecto, this.modosTransportePorDefecto );					
 	}
 	
 	
