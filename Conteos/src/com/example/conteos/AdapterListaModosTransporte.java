@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.Vector;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,17 +32,23 @@ public class AdapterListaModosTransporte extends BaseAdapter {
 	
 	private final Activity actividad;
 	private HashMap<String, Integer> listaStringsIconos;
+	private Set<String> itemsPreferencias;
 	private Set<String> itemsSeleccionados;
 	private View vista;
 	
 	
-	public AdapterListaModosTransporte( Activity actividad, HashMap<String, Integer> listaStringsIconos, 
-			Set<String> itemsPreviosSeleccionados ){
+	public AdapterListaModosTransporte( Activity actividad, HashMap<String, Integer> listaStringsIconos ){
 		super();
-		this.actividad = actividad;
+		this.actividad = actividad;		
 		this.listaStringsIconos = listaStringsIconos;
-		this.itemsSeleccionados = itemsPreviosSeleccionados;
-		Toast.makeText( this.actividad, Arrays.toString( this.itemsSeleccionados.toArray() ), Toast.LENGTH_LONG ).show();
+		this.itemsPreferencias = restaurarItemsSeleccionados();
+		this.itemsSeleccionados = new HashSet<String>();
+	}
+	
+	private Set<String> restaurarItemsSeleccionados(){
+		SharedPreferences prefActuales = this.actividad.getSharedPreferences( "com.example.conteos_preferences", this.actividad.MODE_PRIVATE );
+		Set<String> listaModosTransporteActuales = prefActuales.getStringSet( ModosTransporteListActivity.CLAVE_MODOS_TRANSPORTE, new HashSet<String>() );
+		return listaModosTransporteActuales;
 	}
 	
 	
@@ -66,24 +73,36 @@ public class AdapterListaModosTransporte extends BaseAdapter {
 					itemsSeleccionados.add(  String.valueOf( checkModoTransporte.getText() )  );
 				}
 				else{
-					itemsSeleccionados.remove(  String.valueOf( checkModoTransporte.getText() )  );
+					if (  itemsPreferencias.contains( checkModoTransporte.getText() )  ){
+						itemsPreferencias.remove(  String.valueOf( checkModoTransporte.getText() )  );
+					}
+					else if (  itemsSeleccionados.contains( checkModoTransporte.getText() )  ) {
+						itemsSeleccionados.remove(  String.valueOf( checkModoTransporte.getText() )  );
+					}
 				}
+				Toast.makeText( actividad, "Seleccionados: " + Arrays.toString( itemsSeleccionados.toArray() ), Toast.LENGTH_LONG).show();
+				Toast.makeText( actividad, "Preferencias: " + Arrays.toString( itemsPreferencias.toArray() ), Toast.LENGTH_LONG).show();
 			}			
 		} );
 		
-		if (  this.itemsSeleccionados.contains( nombreMedioTransporte )  ){
+		if (  this.itemsPreferencias.contains( nombreMedioTransporte )  ){
 			checkModoTransporte.setChecked( true );
 		}
 		
 		return vista;
 	}
-	
-	
+		
+		
 	public Set<String> getItemsSeleccionados(){
 		return this.itemsSeleccionados;
 	}
 	
-
+	
+	public Set<String> getItemsPreferencias(){
+		return this.itemsPreferencias;
+	}
+	
+	
 	@Override
 	public int getCount() {
 		return this.listaStringsIconos.size();

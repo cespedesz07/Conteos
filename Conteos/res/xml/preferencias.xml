@@ -27,7 +27,6 @@
   	    android:key="estacion"
   	    android:title="Estación"
   	    android:summary="Número de la estación asociada al conteo."
-  	    android:inputType="number"
   	    android:dialogTitle="Ingrese el número de la estación"
   	    android:defaultValue="1" />
   	

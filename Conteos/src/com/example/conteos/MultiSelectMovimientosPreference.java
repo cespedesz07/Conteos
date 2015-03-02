@@ -4,9 +4,9 @@ package com.example.conteos;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
+import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,13 +14,13 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.MultiSelectListPreference;
 import android.util.AttributeSet;
-import android.widget.Toast;
 
 
 public class MultiSelectMovimientosPreference extends MultiSelectListPreference {
 	
 	
 	public static final String CLAVE_MOVIMIENTOS = "movimientos_a_contar";
+	public static final int MIN_MOVIMIENTOS_SELECCIONADOS = 1;
 	public static final int MAX_MOVIMIENTOS_SELECCIONADOS = 3;
 	
 	private static final int POSICION_ITEM_POR_DEFECTO = 0; 
@@ -28,6 +28,8 @@ public class MultiSelectMovimientosPreference extends MultiSelectListPreference 
 	public Set<String> valoresPorDefecto;
 	private boolean itemsSeleccionados[];
 	private int numItemsSeleccionados;
+	 
+	private boolean excedeLimite;
 	
 
 	
@@ -35,9 +37,10 @@ public class MultiSelectMovimientosPreference extends MultiSelectListPreference 
 		super(context, attrs);
 		this.itemsSeleccionados = new boolean[ getEntries().length ];
 		
-		this.valoresPorDefecto = new HashSet<String>();
-		this.valoresPorDefecto.add(   String.valueOf(getEntries()[ POSICION_ITEM_POR_DEFECTO ])   );
+		ArregloModosMovimientos arreglos = new ArregloModosMovimientos();
+		this.valoresPorDefecto = arreglos.getMovimentosPorDefecto();
 		asignarChecks( this.valoresPorDefecto, getEntries() );
+		
 	}
 	
 	/**
@@ -71,21 +74,28 @@ public class MultiSelectMovimientosPreference extends MultiSelectListPreference 
 	
 	
 	
+	@SuppressWarnings("deprecation")
 	protected void onPrepareDialogBuilder( Builder builder ){
 		CharSequence[] entries = getEntries(); 
+		
 		builder.setMultiChoiceItems(entries, itemsSeleccionados, new DialogInterface.OnMultiChoiceClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int posicionItemSeleccionado, boolean valorItemSeleccionado) {
 				numItemsSeleccionados = obtenerNumItemsSeleccionados();
 				if ( numItemsSeleccionados <= MAX_MOVIMIENTOS_SELECCIONADOS ){
 					itemsSeleccionados[ posicionItemSeleccionado ] = valorItemSeleccionado;
-				}				
+				}
 				else{
-					Toast.makeText( getContext(), "El número máximo de movimientos a contar es: " + MAX_MOVIMIENTOS_SELECCIONADOS, Toast.LENGTH_LONG ).show();
+					excedeLimite = true;
 				}
 			}
 		} );
+		AlertDialog alertDialog = builder.create();
+		
+		
 	}
+	
+	
 	
 	
 	public int obtenerNumItemsSeleccionados(){
@@ -94,6 +104,9 @@ public class MultiSelectMovimientosPreference extends MultiSelectListPreference 
 			if ( itemSeleccionado ){
 				numItems += 1;
 			}
+		}
+		if ( numItems > MAX_MOVIMIENTOS_SELECCIONADOS ){
+			this.excedeLimite = false;
 		}
 		return numItems;
 	}
@@ -118,10 +131,15 @@ public class MultiSelectMovimientosPreference extends MultiSelectListPreference 
 			
 			SharedPreferences prefActuales = getSharedPreferences();
 			Editor editor = prefActuales.edit();
+			editor.remove( CLAVE_MOVIMIENTOS );
+			editor.apply();
 			editor.putStringSet( CLAVE_MOVIMIENTOS , setItemsSeleccionados );
 			editor.commit();
 		}
 	}
+	
+	
+	
 	
 	
 

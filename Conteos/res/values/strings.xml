@@ -18,5 +18,6 @@
     <string name="autoText">Automovil</string>
     <string name="title_activity_modos_transporte">ModosTransporteActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_conexion_web_service_conteos">ConexionWebServiceConteos</string>
 
 </resources>

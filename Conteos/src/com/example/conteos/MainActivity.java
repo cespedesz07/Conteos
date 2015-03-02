@@ -222,7 +222,7 @@ public class MainActivity extends ActionBarActivity {
 								}
 							});
 					
-					Log.i("Testing", "Fuera del Onclick");
+					//Log.i("Testing", "Fuera del Onclick");
 				
 				
 					btnFin.setOnClickListener(new OnClickListener()  //Revisar como finalizar.

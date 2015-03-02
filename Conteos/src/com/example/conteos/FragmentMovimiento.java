@@ -101,7 +101,7 @@ public class FragmentMovimiento extends Fragment implements OnClickListener {
 		this.almacenamientoConteos.guardarConteo(estacion, diaConteo, hora, movimiento, modoTransporte);
 		
 		String texto = String.format( "%s \t%s \t%s \t%s \t%s", estacion, diaConteo, hora, movimiento, modoTransporte );
-		Toast.makeText(getActivity(), "Almacenado: " + texto, Toast.LENGTH_LONG).show();
+		Toast.makeText(getActivity(), "Almacenado: " + texto, Toast.LENGTH_SHORT).show();
 		TextView textViewScroll = (TextView) this.getActivity().findViewById( R.id.textViewScroll );
 		textViewScroll.setText( textViewScroll.getText() + "\n" + texto );
 	}
