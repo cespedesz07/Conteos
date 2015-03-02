@@ -1,6 +1,10 @@
 package com.example.conteos;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.DialogPreference;
@@ -14,7 +18,7 @@ public class TimePickerPreference extends DialogPreference {
 	
 	private static final String SEPARADOR_HORA = ":";
 	public static final String CLAVE_HORA_INCIO_CONTEO = "hora_inicio_conteo";
-	public static final String VALOR_HORA_DEFECTO = "01:00";
+	public static final String VALOR_HORA_DEFECTO = new SimpleDateFormat("HH:mm").format( new Date() );
 	
 	private TimePicker timePicker;
 	
