@@ -6,13 +6,14 @@
     android:orientation="vertical"
     tools:context="com.example.conteos.MainActivity" >
     
-    
     <LinearLayout
         android:id="@+id/fragmentsLayout"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
-        android:orientation="horizontal" >        
-        <!--
+        android:layout_height="300dp"
+        android:layout_weight="3"
+        android:orientation="horizontal" >
+        
+        <!-- aqui van los fragments dinamicos
         <fragment 
             android:name="com.example.conteos.FragmentMovimientoUno"
             android:id="@+id/fragmentMov1"
@@ -34,13 +35,13 @@
          -->
     </LinearLayout>
     
-    
     <LinearLayout
         android:id="@+id/barraLayout"
         android:layout_width="fill_parent"
         android:layout_height="80dp"
         android:background="#000000"
         android:orientation="horizontal" >
+
         <!-- android:layout_weight="1" -->
         
         <ScrollView 

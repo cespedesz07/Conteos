@@ -16,6 +16,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
@@ -312,7 +313,17 @@ public class MainActivity extends ActionBarActivity {
 		this.modosTransportePorDefecto = arreglos.getModosTransportePorDefecto();
 		
 		this.almacenamientoConteos = new AlmacenamientoConteos( this );
-		actualizarGUI( this.movimientosPorDefecto, this.modosTransportePorDefecto );					
+		actualizarGUI( this.movimientosPorDefecto, this.modosTransportePorDefecto );
+		
+		DisplayMetrics metricas = getResources().getDisplayMetrics();
+		String todasMetricas = "Density: " + metricas.density + "\n"
+		+ "Density DPI: " + metricas.densityDpi + "\n"
+		+ "height Pixels: " + metricas.heightPixels + "\n"
+		+ "width pixels: " + metricas.widthPixels + "\n"
+		+ "Scaled Density: " + metricas.scaledDensity + "\n"
+		+ "XDPI: " + metricas.xdpi + "\n"
+		+ "YDPI: " + metricas.ydpi;
+		Toast.makeText( this , todasMetricas, Toast.LENGTH_LONG).show();
 	}
 	
 	
