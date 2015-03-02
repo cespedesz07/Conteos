@@ -20,10 +20,11 @@ public class AlmacenamientoConteos extends SQLiteOpenHelper {
 					+ "dia TEXT NOT NULL,"
 					+ "hora TEXT NOT NULL,"
 					+ "movimiento TEXT NOT NULL,"
-					+ "modo_transporte TEXT NOT NULL);";
+					+ "modo_transporte TEXT NOT NULL,"
+					+ "hora_global TEXT NOT NULL);";
 	
 	//Insercion en la base de datos
-	private static final String SQL_INSERCION_TABLA = "INSERT INTO conteos_vehiculares( 'estacion', 'dia', 'hora', 'movimiento', 'modo_transporte' ) VALUES ( ?, ?, ?, ?, ? )";
+	private static final String SQL_INSERCION_TABLA = "INSERT INTO conteos_vehiculares( 'estacion', 'dia', 'hora', 'movimiento', 'modo_transporte', 'hora_global' ) VALUES ( ?, ?, ?, ?, ?, ? )";
 	
 	
 	
@@ -44,15 +45,16 @@ public class AlmacenamientoConteos extends SQLiteOpenHelper {
 	}
 	
 	
-	public void guardarConteo( String estacion, String dia, String hora, String movimiento, String modoTransporte ){
+	public void guardarConteo( String estacion, String dia, String hora, String movimiento, String modoTransporte, String horaGlobal ){
 		SQLiteDatabase db = getWritableDatabase();
 		SQLiteStatement stat = db.compileStatement( SQL_INSERCION_TABLA );
 		
 		stat.bindString( 1, estacion );
 		stat.bindString( 2, dia );
 		stat.bindString( 3, hora );
-		stat.bindString( 4 , movimiento );
-		stat.bindString( 5 , modoTransporte );
+		stat.bindString( 4, movimiento );
+		stat.bindString( 5, modoTransporte );
+		stat.bindString( 6, horaGlobal );
 		stat.execute();
 		stat.clearBindings();
 	}

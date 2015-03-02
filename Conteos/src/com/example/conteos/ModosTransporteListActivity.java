@@ -1,7 +1,6 @@
 package com.example.conteos;
 
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
 import android.app.ListActivity;
@@ -9,7 +8,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 
 public class ModosTransporteListActivity extends ListActivity {
@@ -24,8 +22,7 @@ public class ModosTransporteListActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView( R.layout.lista_modos_transporte );			
-		
-		
+				
 		ArregloModosMovimientos arreglos = new ArregloModosMovimientos();
 		this.listaModoIconoTransporte = arreglos.getListaModoIconoTransporte();
 		
@@ -57,8 +54,8 @@ public class ModosTransporteListActivity extends ListActivity {
 		editor.apply();								//(2)
 		editor.putStringSet( CLAVE_MODOS_TRANSPORTE, modosTransportePref );	//(3)
 		editor.commit();
-		Toast.makeText( getApplicationContext(), "Items Saved: \n" +  Arrays.toString( modosTransportePref.toArray() ), Toast.LENGTH_LONG ).show();		
-		Toast.makeText( getApplicationContext(), "Items Restored from pref: \n" + Arrays.toString( prefActuales.getStringSet( CLAVE_MODOS_TRANSPORTE, null ).toArray() ), Toast.LENGTH_LONG  ).show();
+		//Toast.makeText( getApplicationContext(), "Items Saved: \n" +  Arrays.toString( modosTransportePref.toArray() ), Toast.LENGTH_LONG ).show();		
+		//Toast.makeText( getApplicationContext(), "Items Restored from pref: \n" + Arrays.toString( prefActuales.getStringSet( CLAVE_MODOS_TRANSPORTE, null ).toArray() ), Toast.LENGTH_LONG  ).show();
 		finish();
 	}
 	

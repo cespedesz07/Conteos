@@ -2,6 +2,7 @@ package com.example.conteos;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Set;
 
 import android.support.v4.app.Fragment;
@@ -32,7 +33,6 @@ public class FragmentMovimiento extends Fragment implements OnClickListener {
 	private int anchoLayout;
 	private ArregloModosMovimientos arregloModosMovimiento;
 	private AlmacenamientoConteos almacenamientoConteos;
-	private Context context;
 	
 	
 	public FragmentMovimiento( String nombreMovimiento, Set<String> modosTransporteActuales, int anchoLayout, 
@@ -98,10 +98,13 @@ public class FragmentMovimiento extends Fragment implements OnClickListener {
 		String movimiento = this.nombreMovimiento;
 		String modoTransporte = botonPresionado.getText().toString();
 		
-		this.almacenamientoConteos.guardarConteo(estacion, diaConteo, hora, movimiento, modoTransporte);
+		Calendar calendar = Calendar.getInstance();
+		String horaGlobal = calendar.getTime().toString();
+		
+		this.almacenamientoConteos.guardarConteo(estacion, diaConteo, hora, movimiento, modoTransporte, horaGlobal );
 		
 		String texto = String.format( "%s \t%s \t%s \t%s \t%s", estacion, diaConteo, hora, movimiento, modoTransporte );
-		Toast.makeText(getActivity(), "Almacenado: " + texto, Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getActivity(), "Almacenado: " + texto, Toast.LENGTH_SHORT).show();
 		TextView textViewScroll = (TextView) this.getActivity().findViewById( R.id.textViewScroll );
 		textViewScroll.setText( textViewScroll.getText() + "\n" + texto );
 	}

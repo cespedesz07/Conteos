@@ -80,8 +80,8 @@ public class AdapterListaModosTransporte extends BaseAdapter {
 						itemsSeleccionados.remove(  String.valueOf( checkModoTransporte.getText() )  );
 					}
 				}
-				Toast.makeText( actividad, "Seleccionados: " + Arrays.toString( itemsSeleccionados.toArray() ), Toast.LENGTH_LONG).show();
-				Toast.makeText( actividad, "Preferencias: " + Arrays.toString( itemsPreferencias.toArray() ), Toast.LENGTH_LONG).show();
+				//Toast.makeText( actividad, "Seleccionados: " + Arrays.toString( itemsSeleccionados.toArray() ), Toast.LENGTH_LONG).show();
+				//Toast.makeText( actividad, "Preferencias: " + Arrays.toString( itemsPreferencias.toArray() ), Toast.LENGTH_LONG).show();
 			}			
 		} );
 		
