@@ -14,6 +14,8 @@ public class ModosTransporteListActivity extends ListActivity {
 	
 	
 	public static final String CLAVE_MODOS_TRANSPORTE = "modos_a_contar";
+	
+	
 	private HashMap<String, Integer> listaModoIconoTransporte;
 	private AdapterListaModosTransporte adapterListaModosTransporte;
 	
@@ -60,10 +62,7 @@ public class ModosTransporteListActivity extends ListActivity {
 	}
 	
 	
-	public void cancelar( View view ){
-		//Se realiza una comparacion de los items que estan actualmente guardados en las preferencias
-		//versus los items seleccionados en el listVIew:
-		//AQUELLOS ITEMS SELECCIONADOS EN EL LISTVIEW QUE NO ESTAN EN LAS PREFERENCIAS, SE ELIMINAN DE LOS ITEMS SELECCIONADOS		
+	public void cancelar( View view ){		
 		finish();
 	}
 	

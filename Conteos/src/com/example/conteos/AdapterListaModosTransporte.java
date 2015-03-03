@@ -2,33 +2,27 @@ package com.example.conteos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.Set;
-import java.util.Vector;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CheckedTextView;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class AdapterListaModosTransporte extends BaseAdapter {
 	
+	
+	public static final int MIN_MODOS_TRANSPORTE_SELECCIONADOS = 1;	
 	
 	private final Activity actividad;
 	private HashMap<String, Integer> listaStringsIconos;
@@ -80,8 +74,16 @@ public class AdapterListaModosTransporte extends BaseAdapter {
 						itemsSeleccionados.remove(  String.valueOf( checkModoTransporte.getText() )  );
 					}
 				}
-				//Toast.makeText( actividad, "Seleccionados: " + Arrays.toString( itemsSeleccionados.toArray() ), Toast.LENGTH_LONG).show();
-				//Toast.makeText( actividad, "Preferencias: " + Arrays.toString( itemsPreferencias.toArray() ), Toast.LENGTH_LONG).show();
+				
+				
+				Button btnAceptar = (Button)actividad.findViewById( R.id.btnAceptar );
+				if ( itemsSeleccionados.isEmpty()  &&  itemsPreferencias.isEmpty() ){					
+					btnAceptar.setEnabled( false );
+					Toast.makeText(actividad, "El No. de movimientos seleccionados debe ser superior a " + MIN_MODOS_TRANSPORTE_SELECCIONADOS , Toast.LENGTH_SHORT).show();
+				}
+				else{
+					btnAceptar.setEnabled( true );
+				}
 			}			
 		} );
 		
