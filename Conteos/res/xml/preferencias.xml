@@ -26,8 +26,8 @@
   	<EditTextPreference
   	    android:key="estacion"
   	    android:title="Estación"
-  	    android:summary="Número de la estación asociada al conteo."
-  	    android:dialogTitle="Ingrese el número de la estación"
+  	    android:summary="Nombre de la estación asociada al conteo."
+  	    android:dialogTitle="Ingrese el nombre de la estación: "
   	    android:defaultValue="1" />
   	
   	
@@ -38,7 +38,7 @@
 	  	    android:key="movimientos_a_contar"
 	  	    android:title="Movimientos a Contar"
 	  	    android:summary="Lista de movimientos a contar"
-  	    	android:dialogTitle="Ingrese el número de movimientos: "
+	  	    android:dialogTitle="Seleccione el número de movimientos a contar:"
   	    	android:entries="@array/movimientos"
   	    	android:entryValues="@array/movimientos" />
 	  	

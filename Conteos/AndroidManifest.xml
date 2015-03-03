@@ -24,11 +24,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PreferenciasActivity" >
+        <activity android:name=".PreferenciasActivity" android:screenOrientation="landscape">
         </activity>
         <activity
             android:name=".ModosTransporteListActivity"
-            android:label="@string/title_activity_modos_transporte" >
+            android:label="@string/title_activity_modos_transporte" android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name=".activities.ModosTransporteListActivity" />
 

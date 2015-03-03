@@ -314,16 +314,6 @@ public class MainActivity extends ActionBarActivity {
 		
 		this.almacenamientoConteos = new AlmacenamientoConteos( this );
 		actualizarGUI( this.movimientosPorDefecto, this.modosTransportePorDefecto );
-		
-		DisplayMetrics metricas = getResources().getDisplayMetrics();
-		String todasMetricas = "Density: " + metricas.density + "\n"
-		+ "Density DPI: " + metricas.densityDpi + "\n"
-		+ "height Pixels: " + metricas.heightPixels + "\n"
-		+ "width pixels: " + metricas.widthPixels + "\n"
-		+ "Scaled Density: " + metricas.scaledDensity + "\n"
-		+ "XDPI: " + metricas.xdpi + "\n"
-		+ "YDPI: " + metricas.ydpi;
-		Toast.makeText( this , todasMetricas, Toast.LENGTH_LONG).show();
 	}
 	
 	

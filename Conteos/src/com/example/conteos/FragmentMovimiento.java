@@ -22,10 +22,13 @@ import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
+
+
 
 
 public class FragmentMovimiento extends Fragment implements OnClickListener {
+	
+	
 	
 	
 	private static final int NUM_BOTONES_EN_FILA = 2;
@@ -36,6 +39,8 @@ public class FragmentMovimiento extends Fragment implements OnClickListener {
 	private AlmacenamientoConteos almacenamientoConteos;
 	
 	
+	
+	
 	public FragmentMovimiento( String nombreMovimiento, Set<String> modosTransporteActuales, int anchoLayout, 
 			AlmacenamientoConteos almacenamientoConteos, Context context ){
 		super();
@@ -44,7 +49,9 @@ public class FragmentMovimiento extends Fragment implements OnClickListener {
 		this.anchoLayout = anchoLayout;
 		this.arregloModosMovimiento = new ArregloModosMovimientos();
 		this.almacenamientoConteos = almacenamientoConteos;
-	}	
+	}
+	
+	
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		View view = inflater.inflate( R.layout.fragment_movimiento, container, false );
@@ -87,6 +94,8 @@ public class FragmentMovimiento extends Fragment implements OnClickListener {
 		return view;
 	}
 
+	
+	
 	
 	@Override
 	public void onClick(View view) {
