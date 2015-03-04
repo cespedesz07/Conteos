@@ -62,6 +62,7 @@ public class MainActivity extends ActionBarActivity {
 	Button btnInicio;
 	Button btnFin;
 	
+	CronometroHilo cronometroH;
 	
 	
 	
@@ -368,7 +369,10 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	protected void onPause(){
 		super.onPause();
+		cronometroH.cancel(true);
 		this.finish();
+		
+		
 	} 
 	
 	
@@ -398,9 +402,11 @@ public class MainActivity extends ActionBarActivity {
 			e.printStackTrace();
 		}
 
-		new CronometroHilo(estadoActivo, inicioPrimerVez, iniciado, progresoHorasConteo, horaInicioFormato).execute(horaInicioFormato);
+		//new CronometroHilo(estadoActivo, inicioPrimerVez, iniciado, progresoHorasConteo, horaInicioFormato).execute(horaInicioFormato);
 		//CronometroHilo cronometro = new CronometroHilo(estadoActivo, inicioPrimerVez, iniciado, progresoHorasConteo, horaInicioFormato);
 		//cronometro.execute(horaInicioFormato);
+		cronometroH  = new CronometroHilo(estadoActivo, inicioPrimerVez, iniciado, progresoHorasConteo, horaInicioFormato);
+		cronometroH.execute(horaInicioFormato);
 	}
 	
 
