@@ -88,7 +88,7 @@ public class FragmentMovimiento extends Fragment implements OnClickListener {
 				ancho = 210;
 			}
 			else{
-				alto = 80;
+				alto = 85;
 				ancho = 150;
 			}
 				

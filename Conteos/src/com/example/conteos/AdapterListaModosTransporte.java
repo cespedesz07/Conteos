@@ -69,7 +69,7 @@ public class AdapterListaModosTransporte extends BaseAdapter {
 		checkModoTransporte.setOnClickListener( new OnClickListener(){
 			@Override
 			public void onClick(View view) {
-				Toast.makeText( actividad , checkModoTransporte.getText().toString() + ": " + checkModoTransporte.isChecked(), Toast.LENGTH_SHORT ).show();
+				//Toast.makeText( actividad , checkModoTransporte.getText().toString() + ": " + checkModoTransporte.isChecked(), Toast.LENGTH_SHORT ).show();
 				if ( checkModoTransporte.isChecked() ){
 					itemsSeleccionados.add(  String.valueOf( checkModoTransporte.getText() )  );
 				}
