@@ -28,7 +28,9 @@ public class AdapterListaModosTransporte extends BaseAdapter {
 	private HashMap<String, Integer> listaStringsIconos;
 	private Set<String> itemsPreferencias;
 	private Set<String> itemsSeleccionados;
+	private Set<String> itemsDeseleccionados;
 	private View vista;
+	
 	
 	
 	public AdapterListaModosTransporte( Activity actividad, HashMap<String, Integer> listaStringsIconos ){
@@ -36,9 +38,12 @@ public class AdapterListaModosTransporte extends BaseAdapter {
 		this.actividad = actividad;		
 		this.listaStringsIconos = listaStringsIconos;
 		this.itemsPreferencias = restaurarItemsSeleccionados();
-		Toast.makeText( this.actividad, Arrays.toString( this.itemsPreferencias.toArray() ), Toast.LENGTH_LONG).show();
+		//Toast.makeText( this.actividad, Arrays.toString( this.itemsPreferencias.toArray() ), Toast.LENGTH_LONG).show();
 		this.itemsSeleccionados = new HashSet<String>();
+		this.itemsDeseleccionados = new HashSet<String>();
 	}
+	
+	
 	
 	private Set<String> restaurarItemsSeleccionados(){
 		SharedPreferences prefActuales = this.actividad.getSharedPreferences( "com.example.conteos_preferences", this.actividad.MODE_PRIVATE );
@@ -64,19 +69,22 @@ public class AdapterListaModosTransporte extends BaseAdapter {
 		checkModoTransporte.setOnClickListener( new OnClickListener(){
 			@Override
 			public void onClick(View view) {
+				Toast.makeText( actividad , checkModoTransporte.getText().toString() + ": " + checkModoTransporte.isChecked(), Toast.LENGTH_SHORT ).show();
 				if ( checkModoTransporte.isChecked() ){
 					itemsSeleccionados.add(  String.valueOf( checkModoTransporte.getText() )  );
 				}
 				else{
 					if (  itemsPreferencias.contains( checkModoTransporte.getText() )  ){
 						itemsPreferencias.remove(  String.valueOf( checkModoTransporte.getText() )  );
+						itemsDeseleccionados.add( String.valueOf( checkModoTransporte.getText() ) );
 					}
 					else if (  itemsSeleccionados.contains( checkModoTransporte.getText() )  ) {
 						itemsSeleccionados.remove(  String.valueOf( checkModoTransporte.getText() )  );
 					}
 				}
-				Toast.makeText( actividad, "Seleccionados: " + Arrays.toString( itemsSeleccionados.toArray() ), Toast.LENGTH_LONG).show();
-				Toast.makeText( actividad, "Van a Preferencias: " + Arrays.toString( itemsPreferencias.toArray() ), Toast.LENGTH_LONG).show();
+				//Toast.makeText( actividad, "Seleccionados: " + Arrays.toString( itemsSeleccionados.toArray() ), Toast.LENGTH_LONG).show();
+				//Toast.makeText( actividad, "Deseleccionados: " + Arrays.toString( itemsDeseleccionados.toArray() ), Toast.LENGTH_LONG).show();
+				//Toast.makeText( actividad, "Van a Preferencias: " + Arrays.toString( itemsPreferencias.toArray() ), Toast.LENGTH_LONG).show();
 				
 				Button btnAceptar = (Button)actividad.findViewById( R.id.btnAceptar );
 				if ( itemsSeleccionados.isEmpty()  &&  itemsPreferencias.isEmpty() ){					
@@ -104,6 +112,11 @@ public class AdapterListaModosTransporte extends BaseAdapter {
 	
 	public Set<String> getItemsPreferencias(){
 		return this.itemsPreferencias;
+	}
+	
+	
+	public Set<String> getItemsDeseleccionados(){
+		return this.itemsDeseleccionados;
 	}
 	
 	

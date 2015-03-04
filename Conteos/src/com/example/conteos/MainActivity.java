@@ -336,7 +336,7 @@ public class MainActivity extends ActionBarActivity {
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		
 		for ( String nombreMovimiento : movimientosActuales ){
-			FragmentMovimiento fragmentMovimiento = new FragmentMovimiento( nombreMovimiento, modosTransporteActuales, tamanoFragments, 
+			FragmentMovimiento fragmentMovimiento = new FragmentMovimiento( nombreMovimiento, movimientosActuales, modosTransporteActuales, tamanoFragments, 
 					this.almacenamientoConteos, this );
 			fragmentTransaction.add( R.id.fragmentsLayout, fragmentMovimiento, nombreMovimiento );
 		}

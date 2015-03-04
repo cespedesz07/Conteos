@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 
 public class ModosTransporteListActivity extends ListActivity {
@@ -62,7 +63,20 @@ public class ModosTransporteListActivity extends ListActivity {
 	}
 	
 	
-	public void cancelar( View view ){		
+	public void cancelar( View view ){			
+		SharedPreferences prefActuales = getSharedPreferences( "com.example.conteos_preferences", MODE_PRIVATE );
+		Set<String> modosTransportePref = this.adapterListaModosTransporte.getItemsPreferencias();
+		Set<String> modosTransporteDeseleccionados = this.adapterListaModosTransporte.getItemsDeseleccionados();
+		for ( String modoTransporteDeseleccionado : modosTransporteDeseleccionados ){
+			modosTransportePref.add( modoTransporteDeseleccionado );
+		}
+		
+		//Toast.makeText( getApplicationContext() , "Guardados por dar cancelar: " + Arrays.toString( modosTransportePref.toArray() ), Toast.LENGTH_LONG).show();
+		Editor editor = prefActuales.edit();
+		editor.remove( CLAVE_MODOS_TRANSPORTE );	//(1)
+		editor.apply();								//(2)
+		editor.putStringSet( CLAVE_MODOS_TRANSPORTE, modosTransportePref );	//(3)
+		editor.commit();
 		finish();
 	}
 	
