@@ -62,6 +62,7 @@ public class MainActivity extends ActionBarActivity {
 	Button btnInicio;
 	Button btnFin;
 	
+	CronometroHilo cronometroH;
 	
 	
 	
@@ -88,6 +89,7 @@ public class MainActivity extends ActionBarActivity {
 		int progresoCronometro = 0;
 		boolean finalizar;
 		
+
 
 		
 		public CronometroHilo(boolean estado, boolean iniciadoPrimerVez, boolean iniciado, int progresoHorasConteo, String horaInicio) //Constructor con el tiempo de conteo?
@@ -329,6 +331,9 @@ public class MainActivity extends ActionBarActivity {
 		this.almacenamientoConteos = new AlmacenamientoConteos( this );
 		actualizarGUI( this.movimientosPorDefecto, this.modosTransportePorDefecto );
 		
+		
+		
+		
 	}
 	
 	
@@ -351,8 +356,11 @@ public class MainActivity extends ActionBarActivity {
 		}
 		fragmentTransaction.commit();
 		
+		
+		
 	}
 
+	
 	
 	
 	@SuppressLint("NewApi")
@@ -378,13 +386,17 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	protected void onPause(){
 		super.onPause();
+		cronometroH.cancel(true);
 		this.finish();
+		
+		
 	} 
 	
 	
 	@Override
 	public void onResume()
 	{
+		
 		super.onResume();
 		//Cronometro cron = new Cronometro();
 		
@@ -408,9 +420,11 @@ public class MainActivity extends ActionBarActivity {
 			e.printStackTrace();
 		}
 
-		new CronometroHilo(estadoActivo, inicioPrimerVez, iniciado, progresoHorasConteo, horaInicioFormato).execute(horaInicioFormato);
+		//new CronometroHilo(estadoActivo, inicioPrimerVez, iniciado, progresoHorasConteo, horaInicioFormato).execute(horaInicioFormato);
 		//CronometroHilo cronometro = new CronometroHilo(estadoActivo, inicioPrimerVez, iniciado, progresoHorasConteo, horaInicioFormato);
 		//cronometro.execute(horaInicioFormato);
+		cronometroH  = new CronometroHilo(estadoActivo, inicioPrimerVez, iniciado, progresoHorasConteo, horaInicioFormato);
+		cronometroH.execute(horaInicioFormato);
 	}
 	
 
