@@ -23,34 +23,130 @@ import android.widget.TableRow.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import android.util.Log;
+
 
 public class FragmentMovimiento extends Fragment implements OnClickListener {
 	
 	
 	private static final int NUM_BOTONES_EN_FILA = 2; //Filas en el TableLayout
 	private String nombreMovimiento; 
+	private ArrayList<String> movimientosActuales;
 	private ArrayList<String> modosTransporteActuales;
 	private int anchoLayout; //Llamado desde el MainActivity para establecer el ancho de cada Fragment
 	private ArregloModosMovimientos arregloModosMovimiento; //-------Entender esta clase
 	private AlmacenamientoConteos almacenamientoConteos;	//------Entender esta clase
-	private Context context;
+	private int ancho;
+	private int alto;
+	//private Context context;
 	
 	
-	public FragmentMovimiento( String nombreMovimiento, Set<String> modosTransporteActuales, int anchoLayout, //El constructor se llama en actualizarGUI
+	public FragmentMovimiento( String nombreMovimiento,Set<String> movimientosActuales, Set<String> modosTransporteActuales, int anchoLayout, //El constructor se llama en actualizarGUI
 			AlmacenamientoConteos almacenamientoConteos, Context context ){
 		super();
 		this.nombreMovimiento = nombreMovimiento;
+		this.movimientosActuales = new ArrayList<String> (movimientosActuales);
 		this.modosTransporteActuales = new ArrayList<String>( modosTransporteActuales );	
 		this.anchoLayout = anchoLayout;
 		this.arregloModosMovimiento = new ArregloModosMovimientos();
 		this.almacenamientoConteos = almacenamientoConteos;
-	}	
+	}
+	
+	
+	public void establecerDimension(ArrayList<String> movimientosActuales, ArrayList<String>modosTransporte)
+	{
+		if (movimientosActuales.size() == 3)
+		{
+			if (modosTransporte.size() == 6){
+				alto = 90;
+				ancho = 150;
+			}
+			else if (modosTransporte.size() == 5){
+				alto = 90;
+				ancho = 150;
+			}
+			else if (modosTransporte.size() == 4){
+				alto = 130;
+				ancho = 150;
+			}
+			else if (modosTransporte.size() == 3){
+				alto = 130;
+				ancho = 160;
+			}
+			else if (modosTransporte.size() == 2){
+				alto = 210;
+				ancho = 160;
+			}
+			else{
+				alto = 210;
+				ancho = 210;
+			}
+				
+		}
+		else if (movimientosActuales.size() == 2)
+		{
+			if (modosTransporte.size() == 6){
+				alto = 90;
+				ancho = 215;
+			}
+			else if (modosTransporte.size() == 5){
+				alto = 90;
+				ancho = 215;
+			}
+			else if (modosTransporte.size() == 4){
+				alto = 130;
+				ancho = 215;
+			}
+			else if (modosTransporte.size() == 3){
+				alto = 130;
+				ancho = 215;
+			}
+			else if (modosTransporte.size() == 2){
+				alto = 210;
+				ancho = 215;
+			}
+			else{
+				alto = 210;
+				ancho = 270;
+			}
+		}
+		else
+		{
+			if (modosTransporte.size() == 6){
+				alto = 90;
+				ancho = 380;
+			}
+			else if (modosTransporte.size() == 5){
+				alto = 90;
+				ancho = 380;
+			}
+			else if (modosTransporte.size() == 4){
+				alto = 130;
+				ancho = 380;
+			}
+			else if (modosTransporte.size() == 3){
+				alto = 130;
+				ancho = 380;
+			}
+			else if (modosTransporte.size() == 2){
+				alto = 210;
+				ancho = 380;
+			}
+			else{
+				alto = 210;
+				ancho = 590;
+			}
+		}
+	}
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		View view = inflater.inflate( R.layout.fragment_movimiento, container, false ); //Infla el Fragment
 		//Verificar si el atributo layout_weight modifica en algo el ViewGroup y mirar con las coordenadas de los botones
 		TextView nombreMovimientoTextView = (TextView) view.findViewById( R.id.nombreMovimiento );
 		nombreMovimientoTextView.setText(  String.valueOf( this.nombreMovimiento )  );
+		establecerDimension(this.movimientosActuales, this.modosTransporteActuales);
+		
+		
 		
 		TableLayout tablaBotonesModosTransporte = (TableLayout) view.findViewById( R.id.tablaBotonesModosTransporte );		
 		int numFilas = (this.modosTransporteActuales.size() / NUM_BOTONES_EN_FILA) + (this.modosTransporteActuales.size() % NUM_BOTONES_EN_FILA);
@@ -76,8 +172,8 @@ public class FragmentMovimiento extends Fragment implements OnClickListener {
 					botonModoTransporte.setCompoundDrawables( null, null, null, drawableEscalado.getDrawable() );
 					//botonModoTransporte.setGravity(Gravity.CENTER);
 					//botonModoTransporte.setPadding(0, 0, 0, 0);
-					botonModoTransporte.setWidth(160);
-					botonModoTransporte.setHeight(95);
+					botonModoTransporte.setHeight(alto);
+					botonModoTransporte.setWidth(ancho);
 					//botonModoTransporte.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 					//botonModoTransporte.setLayoutParams(  new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT )  ); //No esta funcionando bien, revisar como funciona
 

@@ -235,7 +235,7 @@ public class MainActivity extends ActionBarActivity {
 								}
 							});
 					   
-					Log.i("Testing", "Fuera del Onclick");     //Este si esta funcionando
+					//Log.i("Testing", "Fuera del Onclick");     //Este si esta funcionando
 				
 				
 					btnFin.setOnClickListener(new OnClickListener()  //Revisar como finalizar.
@@ -343,9 +343,11 @@ public class MainActivity extends ActionBarActivity {
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		
 		for ( String nombreMovimiento : movimientosActuales ){
-			FragmentMovimiento fragmentMovimiento = new FragmentMovimiento( nombreMovimiento, modosTransporteActuales, tamanoFragments, 
+			FragmentMovimiento fragmentMovimiento = new FragmentMovimiento( nombreMovimiento, movimientosActuales, modosTransporteActuales, tamanoFragments, 
 					this.almacenamientoConteos, this );
 			fragmentTransaction.add( R.id.fragmentsLayout, fragmentMovimiento, nombreMovimiento );
+			
+			Log.i("Show", "Transportes "+ modosTransporteActuales.size() +" Modos "+movimientosActuales.size() );
 		}
 		fragmentTransaction.commit();
 		
