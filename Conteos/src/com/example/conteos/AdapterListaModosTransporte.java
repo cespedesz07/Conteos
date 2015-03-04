@@ -36,6 +36,7 @@ public class AdapterListaModosTransporte extends BaseAdapter {
 		this.actividad = actividad;		
 		this.listaStringsIconos = listaStringsIconos;
 		this.itemsPreferencias = restaurarItemsSeleccionados();
+		Toast.makeText( this.actividad, Arrays.toString( this.itemsPreferencias.toArray() ), Toast.LENGTH_LONG).show();
 		this.itemsSeleccionados = new HashSet<String>();
 	}
 	
@@ -74,7 +75,8 @@ public class AdapterListaModosTransporte extends BaseAdapter {
 						itemsSeleccionados.remove(  String.valueOf( checkModoTransporte.getText() )  );
 					}
 				}
-				
+				Toast.makeText( actividad, "Seleccionados: " + Arrays.toString( itemsSeleccionados.toArray() ), Toast.LENGTH_LONG).show();
+				Toast.makeText( actividad, "Van a Preferencias: " + Arrays.toString( itemsPreferencias.toArray() ), Toast.LENGTH_LONG).show();
 				
 				Button btnAceptar = (Button)actividad.findViewById( R.id.btnAceptar );
 				if ( itemsSeleccionados.isEmpty()  &&  itemsPreferencias.isEmpty() ){					
