@@ -428,8 +428,7 @@ public class MainActivity extends ActionBarActivity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.acerca_de) {
-			return true;
-			//TODO Implementar actividad acerca de
+			abrirAcercaDe();
 		}
 		else if ( id == R.id.preferencias ){
 			abrirPreferencias( null );
@@ -442,6 +441,11 @@ public class MainActivity extends ActionBarActivity {
 	public void abrirPreferencias( View vista ){
 		Intent intentPref = new Intent( this, PreferenciasActivity.class );
 		startActivity( intentPref );		
+	}
+	
+	public void abrirAcercaDe(){
+		Intent intentAcercaDe = new Intent( this, AcercaDeActivity.class );
+		startActivity( intentAcercaDe );		
 	}
 	
 }

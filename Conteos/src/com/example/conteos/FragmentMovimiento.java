@@ -89,7 +89,7 @@ public class FragmentMovimiento extends Fragment implements OnClickListener {
 			}
 			else{
 				alto = 85;
-				ancho = 150;
+				ancho = 90;
 			}
 				
 		}
@@ -121,7 +121,7 @@ public class FragmentMovimiento extends Fragment implements OnClickListener {
 			}
 			else{
 				alto = 80;
-				ancho = 215;
+				ancho = 90;
 			}
 		}
 		else
@@ -153,7 +153,7 @@ public class FragmentMovimiento extends Fragment implements OnClickListener {
 			}
 			else{
 				alto = 80;
-				ancho = 380;
+				ancho = 90;
 			}
 		}
 	}
